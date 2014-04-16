@@ -1,0 +1,21 @@
+common:
+    parameters:
+    php:
+        date.timezone: Europe/Prague
+        # zlib.output_compression: yes
+    nette:
+        application:
+            errorPresenter: Error
+        database:
+            dsn: 'mysql:host=wm55.wedos.net;dbname=d63036_intra'
+            user: 'w63036_intra'
+            password: 'DBwex2014'
+        session:
+            expiration: 14 days
+    services:
+        authenticator: MyAuthenticator
+        routerFactory: RouterFactory
+        router: @routerFactory::createRouter
+    factories:
+production < common:
+development < common:

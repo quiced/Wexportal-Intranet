@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{block title|striptags|upper}{/block}</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="{$basePath}/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{$basePath}/public/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{$basePath}/public/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Page-Level Plugin CSS - Blank -->
+
+    <!-- SB Admin CSS - Include with every page -->
+    <link href="{$basePath}/public/css/sb-admin.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.showless').hide();
+            $('.showless').slideDown(500).delay(1000).slideUp(500);
+        });
+    </script>
+    {block head}{/block}
+    {block ckeditor}{/block}
+
+</head>
+
+<body>
+<script> document.documentElement.className += ' js' </script>
+{if $user->isLoggedIn()}
+    <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" n:href="Homepage:">WexPortal - intranet</a>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li><a n:href="Users:profile "><i class="fa fa-user fa-fw"></i> Nastavení účtu</a>
+                </li>
+                <li class="divider"></li>
+                <li><a n:href="Sign:out"><i class="fa fa-sign-out fa-fw"></i> Odhlášení</a>
+                </li>
+            </ul>
+            <!-- /.navbar-top-links -->
+
+        </nav>
+        <!-- /.navbar-static-top -->
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a n:href="Homepage:">
+                            <i class="fa fa-home fa-fw"></i> Domů</a>
+                    </li>
+                    {if $user->isInRole('admin')}
+                        <li>
+                            <a n:href="Users:list">
+                                <i class="fa fa-user fa-fw"></i> Uživatelé</a>
+                        </li>
+                    {/if}
+                    <li>
+                        <a n:href="Users:">
+                            <i class="fa fa-user fa-fw"></i> Adresář</a>
+                    </li>
+                    <li class="hidden">
+                        <a n:href="Chat:">
+                            <i class="fa fa-envelope fa-fw"></i> Chat</a>
+                    </li>
+                    <li>
+                        <a n:href="Tasks:">
+                            <i class="fa fa-tags fa-fw"></i> Úkoly</a>
+                    </li>
+                    <li>
+                        <a n:href="Forum:">
+                            <i class="fa fa-list-alt fa-fw"></i> Fórum</a>
+                    </li>
+                    <li class="hidden">
+                        <a n:href="Calendar:">
+                            <i class="fa fa-calendar fa-fw"></i> Kalendář</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Systém<span
+                                    class="fa arrow"></span></a>
+
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a n:href="System:bug"><i class="fa fa-warning fa-fw"></i> Nahlásit bug</a>
+                            </li>
+                            <li>
+                                <a n:href="System:update"><i class="fa fa-pencil fa-fw"></i> Update / přidání funkce</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li class="hidden">
+                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
+                                    class="fa arrow"></span></a>
+
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Third Level Item</a>
+                                    </li>
+                                </ul>
+                                <!-- /.nav-third-level -->
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                </ul>
+                <!-- /#side-menu -->
+            </div>
+            <!-- /.sidebar-collapse -->
+        </nav>
+        <!-- /.navbar-static-sie -->
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br>
+
+                    <div class="alertspace alert showless {$flash->type}" n:foreach="$flashes as $flash"><i
+                                class="fa fa-info fa-fw"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+                        </button> {$flash->message}</div>
+                </div>
+            </div>
+
+            {block content}
+
+            {/block}
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+{else}
+    {ifCurrent Sign:in}
+
+    {block sign}
+
+    {/block}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <br>
+                <div class="alertspace alert showless {$flash->type}" n:foreach="$flashes as $flash"><i
+                            class="fa fa-info fa-fw"></i>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×
+                    </button> {$flash->message}</div>
+            </div>
+        </div>
+    {/ifCurrent}
+{/if}
+<!-- /#wrapper -->
+
+<!-- Core Scripts - Include with every page -->
+<script src="{$basePath}/public/js/bootstrap.min.js"></script>
+<script src="{$basePath}/public/js/jquery.metisMenu.js"></script>
+
+<!-- Page-Level Plugin Scripts - Blank -->
+
+<!-- SB Admin Scripts - Include with every page -->
+<script src="{$basePath}/public/js/sb-admin.js"></script>
+
+<!-- Page-Level Demo Scripts - Blank - Use for reference -->
+{block scripts}
+    <script src="{$basePath}/public/js/netteForms.js"></script>
+    <script src="{$basePath}/public/js/main.js"></script>
+{/block}
+</body>
+
+</html>

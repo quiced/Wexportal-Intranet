@@ -1,0 +1,235 @@
+{block content}
+    <br>
+    <div class="alertspace alert alert-warning"><i class="fa fa-info fa-fw"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        Vaše návrhy a bugy prosím směřujte do sekcí <a n:href="System:bug" class="text-primary">Nahlásit bug</a> a <a
+                n:href="System:update">Návrh na update/přidání funkce</a>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Aktualizace
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {if $user->isInRole('admin')}
+                            <li>
+                                16.03.2014 - Proběhla aktualizace systému
+                                <ol class="list">
+                                    <li>
+                                        přidáno:
+                                        <ul>
+                                            <li>
+                                                mazání uživatelů
+                                            </li>
+                                            <li>
+                                                data posledního přihlášení uživatelů
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </li>
+                        {/if}
+                        <li>
+                            04.03.2014 - Proběhla aktualizace systému
+                            <ol class="list">
+                                <li>
+                                    přidáno:
+                                    <ul>
+                                        <li>
+                                            Hlášení bugů
+                                        </li>
+                                        <li>
+                                            Návrh na update/přidání funkce
+                                        </li>
+                                        <li>
+                                            Tlačítko domů
+                                        </li>
+                                        <li>
+                                            Opraven čas v úkolech
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            03.03.2014 - Proběhla aktualizace systému
+                            <ol class="list">
+                                <li>
+                                    přidány další položky v profilu
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Plánované aktualizace
+                </div>
+                <div class="panel-body">
+                    <ol>
+                        <li>
+                            Přidání chatu
+                        </li>
+                        <li>
+                            Přidání "fora"
+                        </li>
+                        <li>
+                            Přidání funkce posílání zpráv
+                        </li>
+                        <li>
+                            Přidání notifikací
+                        </li>
+                        <li>
+                            Přidání kalendáře
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 hidden">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bell fa-fw"></i> Panel notifikací - testovací režim
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="list-group hidden">
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-comment fa-fw"></i> New Comment
+                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-envelope fa-fw"></i> Message Sent
+                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-tasks fa-fw"></i> New Task
+                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-bolt fa-fw"></i> Server Crashed!
+                                    <span class="pull-right text-muted small"><em>11:13 AM</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-warning fa-fw"></i> Server Not Responding
+                                    <span class="pull-right text-muted small"><em>10:57 AM</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-shopping-cart fa-fw"></i> New Order Placed
+                                    <span class="pull-right text-muted small"><em>9:49 AM</em>
+                                    </span>
+                        </a>
+                        <a href="#" class="list-group-item">
+                            <i class="fa fa-money fa-fw"></i> Payment Received
+                                    <span class="pull-right text-muted small"><em>Yesterday</em>
+                                    </span>
+                        </a>
+                    </div>
+                    <a href="#" class="btn btn-default btn-block hidden">View All Alerts</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {if $user->isInRole('admin')}
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Hlášené bugy
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Název</th>
+                                <th>Uživatel</th>
+                                <th>Čas</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $bugs as $item}
+                                <tr>
+                                    <td>{$item->id}</td>
+                                    <td>{$item->name}</td>
+                                    <td>{$item->user|UserName}</td>
+                                    <td>{$item->time|date:'%H:%m - %d.%m.%Y'}</td>
+                                    <td><a n:href="System:ShowBug $item->id" class="btn btn-primary"><i
+                                                    class="fa fa-eye fa-fw"></i></a></td>
+                                </tr>
+                            {/foreach}
+                            {if count($bugs) == 0}
+                                <tr>
+                                    <td colspan="4">Žádné hlášené bugy</td>
+
+                                </tr>
+                            {/if}
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <a n:href="System:bugs" class="text-danger">Zobrazit všechny</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Návrhy na přidání/update
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Název</th>
+                                <th>Uživatel</th>
+                                <th>Čas</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {foreach $updates as $item}
+                                <tr>
+                                    <td>{$item->id}</td>
+                                    <td>{$item->name}</td>
+                                    <td>{$item->user|UserName}</td>
+                                    <td>{$item->time|date:'%H:%m - %d.%m.%Y'}</td>
+                                    <td><a n:href="System:ShowUpdate $item->id" class="btn btn-primary"><i
+                                                    class="fa fa-eye fa-fw"></i></a></td>
+                                </tr>
+                            {/foreach}
+
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <a n:href="System:updates" class="text-primary">Zobrazit všechny</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    {/if}
+{/block}

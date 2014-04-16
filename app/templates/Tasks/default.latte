@@ -1,0 +1,56 @@
+{block content}
+    <div class="row navbar">
+        <div class="col-lg-12">
+            <h1 class="page-header">Úkoly</h1>
+            <a n:href="Tasks:new" class="btn btn-primary">Přidat</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="table">
+                    <thead>
+                    <tr>
+                        <th>
+                            #
+                        </th>
+                        <th>
+                            Název
+                        </th>
+                        <th>
+                            Datum ukončení
+                        </th>
+                        <th>
+                            Zadavatel
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $tasks as $task}
+                        <tr {$task->read|RowStatus2} {$task->worker|RowStatus}>
+                            <td>{$task->id}</td>
+                            <td><a n:href="Tasks:show $task->id">{$task->name}</a></td>
+                            <td>{$task->endtime}</td>
+                            <td>{$task->user_id|UserName}</td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}
+{block head}
+    <script src="{$basePath}/public/js/jquery.dataTables.js"></script>
+    <script src="{$basePath}/public/js/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').dataTable({
+                "aaSorting": [[0,'desc']],
+                "aLengthMenu": [[20, 50, 100, -1], [20, 50, 100, "Vše"]],
+                "aoColumnDefs": [
+                    { "bSearchable": false, "bVisible": false, "aTargets": [ 0 ] }
+                ] } );
+            });
+    </script>
+{/block}

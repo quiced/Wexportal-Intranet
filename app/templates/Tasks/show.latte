@@ -1,0 +1,109 @@
+{block content}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Úkol: {$taskData->name}</h1>
+        </div>
+        <div class="col-lg-9">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p>{!$taskData->text|nl2br}</p>
+                </div>
+                <div class="panel-footer">
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Vložte nový příspěvek
+                </div>
+                <div class="panel-body">
+                    {control chatForm}
+                </div>
+            </div>
+            <!--mesages -->
+            {snippet header}
+                <div class="itemsContainer">
+                    <h2>Příspěvky:</h2>
+                    {foreach $chat as $chatmessages}
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <p class="text-left"><em>{$chatmessages->user_id|UserName}</em></p>
+                                    </div>
+                                    <div class="col-lg-2 col-lg-offset-8">
+                                        <p class="text-right">{$chatmessages->time|date:'%H:%m - %d.%m.%Y'} </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>{!$chatmessages->message|nl2br}</p>
+                            </div>
+                        </div>
+                    {/foreach}
+                </div>
+            {/snippet}
+
+        </div>
+        <div class="col-lg-3">
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    Info o úkolu
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="text-left"><strong>Pracující:</strong></p>
+
+                            <p>{$taskData->worker|WorkerName}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p><strong>Zadavatel:</strong></p>
+
+                            <p> {$taskData->user_id|UserName}</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p><strong>Datum ukončení:</strong></p>
+
+                            <p> {$taskData->endtime} </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {if $user->isInRole('admin')}
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Akce
+                    </div>
+                    <div class="panel-body">
+                        <a n:href="Tasks:edit $taskData->id" class="btn btn-primary btn-outline">Upravit</a>
+                        <a n:href="Tasks:deleteTask $taskData->id" class="btn btn-danger btn-outline"
+                           onclick="return confirm('Jste si jistí?')">Smazat</a>
+                    </div>
+                </div>
+            {elseif $taskData->user_id == $user->id}
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        Akce
+                    </div>
+                    <div class="panel-body">
+                        <a n:href="Tasks:edit $taskData->id" class="btn btn-primary btn-outline">Upravit</a>
+                        <a n:href="Tasks:deleteTask $taskData->id" class="btn btn-danger btn-outline"
+                           onclick="return confirm('Jste si jistí?')">Smazat</a>
+                    </div>
+                </div>
+            {/if}
+        </div>
+    </div>
+{/block}
+{block head}
+    <script>
+        window.onload = function () {
+            CKEDITOR.replace('content');
+        }
+    </script>
+{/block}
