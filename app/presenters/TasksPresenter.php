@@ -39,7 +39,7 @@ class TasksPresenter extends BasePresenter
 
         $form = new Nette\Application\UI\Form;
 
-        $form->addText('name', 'Název:')
+        $form->addText('name', 'Název')
             ->setRequired('Vyplňte pole název')
             ->setAttribute('class', 'form-control input-block-label')
             ->addRule(Form::MIN_LENGTH, 'Nazev musí obsahovat nejméne 4 znaky', '4');
