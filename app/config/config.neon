@@ -7,9 +7,9 @@ common:
         application:
             errorPresenter: Error
         database:
-            dsn: 'mysql:host=wm55.wedos.net;dbname=d63036_intra'
-            user: 'w63036_intra'
-            password: 'DBwex2014'
+            dsn: 'mysql:host=localhost;dbname=wexportal'
+            user: 'root'
+            password: ''
         session:
             expiration: 14 days
     services:
